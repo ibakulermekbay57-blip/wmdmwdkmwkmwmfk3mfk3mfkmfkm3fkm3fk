@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сарыағаштың дыбыстық әлемі</title>
+<style>
+:root{--w:#fff;--lg:#e4f4dc;--lg2:#cfeac2;--sky:#d8f0f3;--teal:#1d8c94;--dg:#143f2c;--ink:#1c2b24;--mut:#52665c;--r:#d64545;--y:#e6b422;--g:#3a9d5d}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--w)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--dg);line-height:1.2;margin:0 0 .5em}
+header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.95);border-bottom:1px solid var(--lg2)}
+.bar{max-width:1060px;margin:auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.logo{font:700 19px Georgia,serif;color:var(--dg)}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+button,.btn{font:inherit;cursor:pointer}
+nav button{border:0;background:none;padding:8px 14px;border-radius:99px;color:var(--dg)}
+nav button:hover{background:var(--lg)}
+nav button.on{background:var(--dg);color:#fff}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+main{max-width:1060px;margin:auto;padding:0 16px}
+section{display:none;padding:36px 0 48px}
+section.on{display:block}
+.hero{background:linear-gradient(160deg,var(--lg) 0%,var(--sky) 100%);border-radius:28px;padding:48px 28px;margin-top:20px}
+.hero h1{font-size:clamp(30px,6vw,52px)}
+.hero p{max-width:62ch;color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.cta button{padding:13px 22px;border-radius:14px;border:2px solid var(--dg);background:#fff;color:var(--dg);font-weight:600}
+.cta button:first-child{background:var(--dg);color:#fff}
+.cta button:hover{transform:translateY(-2px)}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px}
+.chip{background:var(--lg);border-radius:16px;padding:16px}
+.chip b{display:block;color:var(--dg)}
+.chip small{color:var(--mut)}
+.chip.city{background:var(--sky)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.card{border:1px solid var(--lg2);border-radius:20px;overflow:hidden;background:#fff}
+.pic{height:140px;display:grid;place-items:center;font-size:62px}
+.cb{padding:16px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.play{padding:10px 20px;border-radius:99px;border:0;background:var(--teal);color:#fff;font-weight:600;min-width:120px}
+.play.on{background:var(--dg)}
+.up{font-size:13px;color:var(--mut);display:block;margin-top:10px}
+.up input{max-width:100%;font-size:13px}
+.src{font-size:13px;color:var(--mut);margin:6px 0 0}
+.mapbox{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px}
+@media(max-width:760px){.mapbox{grid-template-columns:1fr}}
+svg{width:100%;height:auto;background:var(--sky);border-radius:20px}
+.zone{cursor:pointer;stroke:#fff;stroke-width:3;transition:opacity .15s}
+.zone:hover,.zone.sel{opacity:.8;stroke:var(--dg)}
+.info{background:var(--lg);border-radius:20px;padding:20px;align-self:start}
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.leg button{border:2px solid var(--dg);background:#fff;border-radius:99px;padding:6px 14px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px}
+.q{border:1px solid var(--lg2);border-radius:16px;padding:16px;margin:0 0 14px}
+.q legend,.q .t{font-weight:600;color:var(--dg);padding:0 6px}
+.q label{display:block;padding:5px 0;cursor:pointer}
+textarea{width:100%;min-height:80px;font:inherit;padding:10px;border:1px solid var(--lg2);border-radius:12px}
+.send{padding:13px 26px;border-radius:14px;border:0;background:var(--dg);color:#fff;font-weight:600}
+.ghost{padding:13px 22px;border-radius:14px;border:2px solid var(--dg);background:#fff;color:var(--dg);font-weight:600}
+.msg{margin:12px 0;color:var(--g);font-weight:600}
+.err{color:var(--r)}
+.bar2{background:var(--lg);border-radius:8px;height:22px;margin:4px 0 10px;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--teal);color:#fff;font:12px/22px system-ui;padding-left:8px;white-space:nowrap}
+.open li{background:var(--sky);border-radius:10px;padding:8px 12px;margin:6px 0;list-style:none}
+footer{background:var(--dg);color:#dff0e2;margin-top:20px;padding:30px 16px;text-align:center}
+footer b{font:700 20px Georgia,serif;color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="logo">🌿 SARYAGASH SOUND</div>
+<nav id="nav">
+<button data-s="home" class="on">Басты бет</button>
+<button data-s="sounds">Дыбыстар әлемі</button>
+<button data-s="map">Дыбыстық карта</button>
+<button data-s="survey">Сауалнама</button>
+</nav></div></header>
+
+<main>
+<!-- 1. БАСТЫ БЕТ -->
+<section id="home" class="on">
+<div class="hero">
+<h1>Сарыағаштың дыбыстық әлемі</h1>
+<p>Сарыағаш — өзінің табиғи дыбыстарымен, құстардың үнімен және қала тіршілігінің әуенімен ерекшеленетін өңір. Біздің ғылыми жобамызда Сарыағаштың дыбыстық әлемі зерттеліп, табиғат пен қала дыбыстары веб-сайт арқылы таныстырылады.</p>
+<p>Оқырман сайттағы дыбыс атауын басу арқылы құстардың әнін және басқа да дыбыстарды тыңдай алады. Бұл сайт арқылы өңірдің өзіндік дыбыстық келбетімен танысып, табиғат пен қала дыбыстарының ерекшеліктерін байқауға болады.</p>
+<div class="cta">
+<button data-s="sounds">Дыбыстарды тыңдау</button>
+<button data-s="map">Сарыағаш картасы</button>
+<button data-s="survey">Сауалнамаға қатысу</button>
+</div></div>
+<div class="chips">
+<div class="chip"><b>Судың сылдыры</b><small>Ағып жатқан судың дыбысы</small></div>
+<div class="chip"><b>Желдің гуілі</b><small>Желдің табиғаттағы үні</small></div>
+<div class="chip"><b>Жапырақтардың сыбдыры</b><small>Ағаш жапырақтарының қозғалысы</small></div>
+<div class="chip city"><b>🏙 Көлік шуы</b><small>Қала көшелеріндегі көлік қозғалысы</small></div>
+<div class="chip city"><b>🏙 Қаладағы адамдардың дауысы</b><small>Қоғамдық орындардағы адамдар үні</small></div>
+</div>
+</section>
+
+<!-- 2. ДЫБЫСТАР ӘЛЕМІ -->
+<section id="sounds">
+<h2>Дыбыстар әлемі</h2>
+<p>Play батырмасын басыңыз. Өз жазбаңыз болса, картадағы «MP3 жүктеу» арқылы қосыңыз — ол синтезделген үлгінің орнына ойнатылады.</p>
+<div class="grid" id="cards"></div>
+</section>
+
+<!-- 3. КАРТА -->
+<section id="map">
+<h2>Дыбыстық карта</h2>
+<p>Аймақты немесе түсті басыңыз — сипаттамасы оң жақта көрінеді.</p>
+<div class="mapbox">
+<div>
+<svg viewBox="0 0 400 300" role="img" aria-label="Сарыағаш аумағының сызбасы">
+<path class="zone" id="z-g" data-z="g" tabindex="0" role="button" aria-label="Жасыл аймақ" d="M20 40 L190 20 L210 120 L120 170 L25 150 Z" fill="#3a9d5d"/>
+<path class="zone" id="z-y" data-z="y" tabindex="0" role="button" aria-label="Сары аймақ" d="M190 20 L380 50 L370 140 L210 120 Z" fill="#e6b422"/>
+<path class="zone" id="z-r" data-z="r" tabindex="0" role="button" aria-label="Қызыл аймақ" d="M25 150 L120 170 L210 120 L370 140 L350 270 L60 280 Z" fill="#d64545"/>
+<g font-size="14" fill="#fff" font-family="system-ui" text-anchor="middle" pointer-events="none" font-weight="700">
+<text x="105" y="95">Жасыл</text><text x="285" y="85" fill="#143f2c">Сары</text><text x="210" y="220">Қызыл</text></g>
+</svg>
+<p class="src">Бұл — көрнекі сызба. Нақты картаның суретін қоссаңыз, аймақтарды соған бейімдеуге болады.</p>
+<div class="leg" id="leg"></div>
+</div>
+<div class="info" id="info" aria-live="polite"><h3>Аймақты таңдаңыз</h3><p>Жасыл, сары немесе қызыл аймақты басыңыз.</p></div>
+</div>
+</section>
+
+<!-- 4. САУАЛНАМА -->
+<section id="survey">
+<h2>Сауалнама</h2>
+<div class="row" style="margin-bottom:16px">
+<button class="ghost" id="tabForm">Сұрақтар</button>
+<button class="ghost" id="tabRes">Нәтижелерді көру</button>
+</div>
+<div id="formWrap">
+<form id="form" onsubmit="return false"></form>
+<div class="row"><button class="send" id="sendBtn">Жауаптарды жіберу</button></div>
+<div class="msg" id="smsg" role="status"></div>
+</div>
+<div id="resWrap" hidden></div>
+</section>
+</main>
+
+<footer>
+<b>Сарыағаштың дыбыстық әлемі</b>
+<p>Бұл жоба табиғат пен қала дыбыстарының Сарыағаш өңірін қалай ерекшелейтінін көрсетеді. Тыңдаңыз, байқаңыз, пікіріңізбен бөлісіңіз.</p>
+</footer>
+
+<script>
+/* ---------- Навигация ---------- */
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));
+  stopAll(); window.scrollTo({top:0});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(b)show(b.dataset.s)});
+
+/* ---------- Дыбыстар ---------- */
+const SOUNDS=[
+ {id:'water',n:'Судың сылдыры',e:'💧',bg:'#d8f0f3'},
+ {id:'wind',n:'Желдің гуілі',e:'🍃',bg:'#e4f4dc'},
+ {id:'leaves',n:'Жапырақтардың сыбдыры',e:'🌳',bg:'#cfeac2'},
+ {id:'bird',n:'Құстардың әні',e:'🐦',bg:'#d8f0f3'},
+ {id:'car',n:'Көлік шуы',e:'🚗',bg:'#eef3f4'},
+ {id:'voices',n:'Қаладағы адамдардың дауысы',e:'🏙',bg:'#e8f0ec'}
+];
+let ctx,nb,cur=null;
+function ac(){
+  if(!ctx){const A=window.AudioContext||window.webkitAudioContext;ctx=new A();
+    nb=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);
+    const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;}
+  if(ctx.state==='suspended')ctx.resume();return ctx;
+}
+/* Синтезделген дыбыстар (MP3 жүктелмегенде) */
+function synth(type){
+  ac();const src=[],out=ctx.createGain();out.gain.value=.6;out.connect(ctx.destination);let timer=null;
+  const noise=()=>{const s=ctx.createBufferSource();s.buffer=nb;s.loop=true;s.start();src.push(s);return s};
+  const filt=(t,f,q)=>{const x=ctx.createBiquadFilter();x.type=t;x.frequency.value=f;x.Q.value=q||1;return x};
+  const lfo=(f,d,p)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;g.gain.value=d;o.connect(g);g.connect(p);o.start();src.push(o)};
+  const chain=(t,f,q,gv)=>{const n=noise(),fl=filt(t,f,q),g=ctx.createGain();g.gain.value=gv;n.connect(fl);fl.connect(g);g.connect(out);return g};
+  if(type==='water'){const g=chain('bandpass',1400,.7,.5);lfo(.5,.15,g.gain)}
+  if(type==='wind'){const g=chain('lowpass',500,1,.5);lfo(.12,.3,g.gain)}
+  if(type==='leaves'){const g=chain('highpass',4000,1,.25);lfo(7,.2,g.gain)}
+  if(type==='car'){const g=chain('lowpass',180,1,1);lfo(.2,.3,g.gain);
+    const o=ctx.createOscillator(),f=filt('lowpass',200),og=ctx.createGain();o.type='sawtooth';o.frequency.value=55;og.gain.value=.15;o.connect(f);f.connect(og);og.connect(out);o.start();src.push(o)}
+  if(type==='voices'){const g=chain('bandpass',600,1.5,.6);lfo(3.3,.3,g.gain)}
+  if(type==='bird'){
+    const chirp=()=>{const t=ctx.currentTime,n=2+Math.floor(Math.random()*3);
+      for(let i=0;i<n;i++){const o=ctx.createOscillator(),g=ctx.createGain(),s=t+i*.16,b=3000+Math.random()*1500;
+        o.frequency.setValueAtTime(b,s);o.frequency.exponentialRampToValueAtTime(b*1.4,s+.1);
+        g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.25,s+.03);g.gain.linearRampToValueAtTime(0,s+.12);
+        o.connect(g);g.connect(out);o.start(s);o.stop(s+.15)}};
+    chirp();timer=setInterval(chirp,1400)}
+  return()=>{src.forEach(s=>{try{s.stop()}catch(e){}});clearInterval(timer);out.disconnect()};
+}
+function stopAll(){if(cur){cur.stop();cur=null}}
+const cards=document.getElementById('cards');
+SOUNDS.forEach(s=>{
+  const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<div class="pic" style="background:${s.bg}" aria-hidden="true">${s.e}</div>
+  <div class="cb"><h3>${s.n}</h3>
+  <div class="row"><button class="play" aria-pressed="false">▶ Play</button></div>
+  <label class="up">MP3 жүктеу<br><input type="file" accept="audio/mpeg,audio/mp3,.mp3"></label>
+  <p class="src">Көзі: синтезделген үлгі</p></div>`;
+  const btn=d.querySelector('.play'),file=d.querySelector('input'),src=d.querySelector('.src');
+  let audio=null;
+  const reset=()=>{btn.textContent='▶ Play';btn.classList.remove('on');btn.setAttribute('aria-pressed','false')};
+  file.addEventListener('change',()=>{
+    const f=file.files[0];if(!f)return;
+    if(cur&&cur.btn===btn)stopAll();
+    if(audio)URL.revokeObjectURL(audio.src);
+    audio=new Audio(URL.createObjectURL(f));audio.loop=true;
+    src.textContent='Көзі: '+f.name;
+  });
+  btn.addEventListener('click',()=>{
+    if(cur&&cur.btn===btn){stopAll();return}
+    stopAll();
+    let end;
+    if(audio){audio.currentTime=0;audio.play();end=()=>audio.pause()}
+    else end=synth(s.id);
+    cur={btn,stop:()=>{end();reset()}};
+    btn.textContent='⏸ Pause';btn.classList.add('on');btn.setAttribute('aria-pressed','true');
+  });
+  cards.appendChild(d);
+});
+
+/* ---------- Карта ---------- */
+const ZONES={
+ g:{c:'#3a9d5d',t:'Жасыл аймақ — табиғи тыныш',p:'Су, жел, жапырақ және құс дыбыстары басым. Көлік шуы өте аз, табиғи дыбыстар анық естіледі.'},
+ y:{c:'#e6b422',t:'Сары аймақ — аралас',p:'Табиғат пен қала дыбыстары араласады. Күндізгі уақытта шу орташа, таңертең мен кешке құс әні естіледі.'},
+ r:{c:'#d64545',t:'Қызыл аймақ — шулы',p:'Қала орталығы мен негізгі көшелер. Көлік шуы мен адамдар дауысы басым, табиғи дыбыстар қиын естіледі.'}
+};
+function pick(k){
+  const z=ZONES[k];
+  document.querySelectorAll('.zone').forEach(e=>e.classList.toggle('sel',e.dataset.z===k));
+  document.getElementById('info').innerHTML=`<h3><span class="dot" style="background:${z.c}"></span>${z.t}</h3><p>${z.p}</p>`;
+}
+document.querySelectorAll('.zone').forEach(e=>{
+  e.addEventListener('click',()=>pick(e.dataset.z));
+  e.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick(e.dataset.z)}});
+});
+const leg=document.getElementById('leg');
+Object.keys(ZONES).forEach(k=>{
+  const b=document.createElement('button');
+  b.innerHTML=`<span class="dot" style="background:${ZONES[k].c}"></span>${ZONES[k].t.split(' — ')[0]}`;
+  b.onclick=()=>pick(k);leg.appendChild(b);
+});
+
+/* ---------- Сауалнама ---------- */
+/* Сұрақтарды өз сұрақтарыңызға ауыстырыңыз: o — нұсқалар тізімі, o жоқ болса — ашық жауап */
+const QS=[
+ {q:'Сарыағаштың қай дыбысы сізге ең жағымды?',o:['Судың сылдыры','Желдің гуілі','Жапырақтардың сыбдыры','Құстардың әні','Қала дыбыстары']},
+ {q:'Табиғат дыбыстарын қаншалықты жиі тыңдайсыз?',o:['Күнде','Аптасына бірнеше рет','Сирек','Мүлде тыңдамаймын']},
+ {q:'Қала шуы сізді жиі мазалай ма?',o:['Иә, жиі','Кейде','Сирек','Жоқ']},
+ {q:'Күннің қай мезгілінде құстар әні көбірек естіледі?',o:['Таңертең','Күндіз','Кешке','Білмеймін']},
+ {q:'Сарыағаштағы ең шулы жер қайсы деп ойлайсыз?'},
+ {q:'Сарыағаштағы ең тыныш әрі жағымды жер қайсы?'},
+ {q:'Сайттағы дыбыстардың сапасы қалай?',o:['Өте жақсы','Жақсы','Орташа','Жақсартуды қажет етеді']},
+ {q:'Қала шуын азайту керек деп ойлайсыз ба?',o:['Иә, міндетті','Ішінара','Қажет емес']},
+ {q:'Сайтқа қандай дыбыстарды қосуды ұсынасыз?'},
+ {q:'Жоба туралы пікіріңіз бен ұсыныстарыңыз:'}
+];
+const KEY='saryagash_sound_answers';
+const form=document.getElementById('form');
+QS.forEach((x,i)=>{
+  const f=document.createElement('fieldset');f.className='q';
+  let h=`<legend>${i+1}. ${x.q}</legend>`;
+  if(x.o)x.o.forEach((o,j)=>h+=`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`);
+  else h+=`<textarea name="q${i}" placeholder="Жауабыңызды жазыңыз"></textarea>`;
+  f.innerHTML=h;form.appendChild(f);
+});
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return null}};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const smsg=document.getElementById('smsg');
+document.getElementById('sendBtn').onclick=()=>{
+  const ans=[];let any=false;
+  QS.forEach((x,i)=>{
+    if(x.o){const r=form.querySelector(`input[name=q${i}]:checked`);ans.push(r?+r.value:null);if(r)any=true}
+    else{const v=form['q'+i].value.trim();ans.push(v||null);if(v)any=true}
+  });
+  smsg.className='msg';
+  if(!any){smsg.className='msg err';smsg.textContent='Кемінде бір сұраққа жауап беріңіз.';return}
+  const all=load();
+  if(all===null){smsg.className='msg err';smsg.textContent='Браузер жауапты сақтай алмады. Сайтты файл ретінде емес, хостингте ашып көріңіз.';return}
+  all.push({t:new Date().toLocaleString('kk-KZ'),a:ans});
+  try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){smsg.className='msg err';smsg.textContent='Сақтау мүмкін болмады.';return}
+  form.reset();smsg.textContent='Рахмет! Жауаптарыңыз қабылданды.';
+};
+const formWrap=document.getElementById('formWrap'),resWrap=document.getElementById('resWrap');
+function renderRes(){
+  const all=load()||[];
+  let h=`<p><b>Қатысушылар саны: ${all.length}</b></p>`;
+  QS.forEach((x,i)=>{
+    h+=`<div class="q"><div class="t">${i+1}. ${x.q}</div>`;
+    if(x.o){
+      const c=x.o.map(()=>0);all.forEach(r=>{if(r.a[i]!==null)c[r.a[i]]++});
+      const tot=c.reduce((a,b)=>a+b,0)||1;
+      x.o.forEach((o,j)=>{const p=Math.round(c[j]/tot*100);
+        h+=`<div>${o} — ${c[j]}</div><div class="bar2"><i style="width:${Math.max(p,c[j]?8:0)}%">${p}%</i></div>`});
+    }else{
+      const t=all.map(r=>r.a[i]).filter(Boolean);
+      h+=t.length?`<ul class="open" style="padding:0">${t.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:'<p class="src">Әзірге жауап жоқ.</p>';
+    }
+    h+='</div>';
+  });
+  h+='<button class="ghost" id="clr">Барлық жауаптарды өшіру</button>';
+  resWrap.innerHTML=h;
+  document.getElementById('clr').onclick=()=>{if(confirm('Барлық жауаптар өшіріледі. Жалғастырасыз ба?')){try{localStorage.removeItem(KEY)}catch(e){}renderRes()}};
+}
+document.getElementById('tabForm').onclick=()=>{formWrap.hidden=false;resWrap.hidden=true};
+document.getElementById('tabRes').onclick=()=>{renderRes();formWrap.hidden=true;resWrap.hidden=false};
+</script>
+</body>
+</html>
